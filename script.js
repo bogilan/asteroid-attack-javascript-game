@@ -63,13 +63,48 @@ const spaceship = {
     height: 50, // Height of the spaceship sprite
 };
 
-function gameLoop() {
-    renderGraphics()
-    requestAnimationFrame(gameLoop);
+// Define variables to track the spaceship's movement
+let spaceshipSpeed = 5;
+let spaceshipDirection = 0; // 0 = not moving, 1 = left, 2 = right
+
+// Add event listeners for arrow key presses
+document.addEventListener('keydown', (event) => {
+  if (event.code === 'ArrowLeft') {
+    spaceshipDirection = 1;
+  } else if (event.code === 'ArrowRight') {
+    spaceshipDirection = 2;
+  }
+});
+
+document.addEventListener('keyup', (event) => {
+  if (event.code === 'ArrowLeft' || event.code === 'ArrowRight') {
+    spaceshipDirection = 0;
+  }
+});
+
+// Update the spaceship's position based on user input
+function updateSpaceshipPosition() {
+  if (spaceshipDirection === 1) {
+    // Move the spaceship left
+    spaceship.x -= spaceshipSpeed;
+  } else if (spaceshipDirection === 2) {
+    // Move the spaceship right
+    spaceship.x += spaceshipSpeed;
+  }
+
+  // Keep the spaceship within the bounds of the canvas
+  if (spaceship.x < 0) {
+    spaceship.x = 0;
+  } else if (spaceship.x + spaceship.width > canvas.width) {
+    spaceship.x = canvas.width - spaceship.width;
+  }
 }
 
-function updateGameState() {
-    // Update game state logic here
+
+function gameLoop() {
+    renderGraphics();
+    updateSpaceshipPosition();
+    requestAnimationFrame(gameLoop);
 }
 
 function renderGraphics() {
