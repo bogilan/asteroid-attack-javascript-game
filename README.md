@@ -1,6 +1,6 @@
 # Work in Progress
 
-# asteroid-attack-javascript-game
+# Asteroid Attack Javascript Game
 Asteroid Attack is a simple 2D game built with HTML5 Canvas and JavaScript. In this game, the player controls a spaceship to avoid incoming asteroids and survive as long as possible.
 
 The game features:
